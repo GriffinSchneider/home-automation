@@ -1,0 +1,3 @@
+[submodule "ruby-hue"]
+	path = ruby-hue
+	url = git://github.com/kballenegger/ruby-hue.git
