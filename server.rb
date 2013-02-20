@@ -5,8 +5,17 @@ require 'hue'
 require 'terminal-notifier'
 require 'sinatra'
 
-TV = 1
-TABLE = 6
+lights = {
+  "tv" => 1,
+  "ceiling" => 2,
+  "hallway" => 3,
+  "multilamp" => 4,
+  "bathroom" => 5,
+  "table" => 6,
+  "bedroom" => 7,
+  "kitchen" => 8,
+}
+
 
 
 # Iniailize Hue
@@ -52,19 +61,17 @@ get '/randomWalk' do
   end
 end
 
-# Slight changes to selected lights
-lights_to_ripple = [TV]
+# Slight changes to selected light
 get '/ripple/:light' do
   updateHues
+  light = (lights[params[:light]] or Integer(params[:light]))
   startProgram do
-    $hues.each_with_index do |hue, i|
-      if lights_to_ripple.index(i+1)
-        newColor = hue[1] + (5000 * (2*rand - 1)) 
-        newColor = [Integer(newColor), 65535].min
-        $h.write(i+1, {hue: newColor})
-      end
-    end
+    hue = $hues[light - 1]
+    newColor = hue + (5000 * (2*rand - 1)) 
+    newColor = [Integer(newColor), 65535].min
+    $h.write(light, {hue: newColor})
   end
+  "asdf"
 end
 
 # Stop the current program
