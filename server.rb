@@ -64,14 +64,14 @@ end
 # Slight changes to selected light
 get '/ripple/:light' do
   updateHues
-  light = (lights[params[:light]] or Integer(params[:light]))
+  begin light = (lights[params[:light]] or Integer(params[:light]))
+  rescue; return "Invalid light" end
   startProgram do
     hue = $hues[light - 1]
     newColor = hue + (5000 * (2*rand - 1)) 
     newColor = [Integer(newColor), 65535].min
     $h.write(light, {hue: newColor})
   end
-  "asdf"
 end
 
 # Stop the current program
