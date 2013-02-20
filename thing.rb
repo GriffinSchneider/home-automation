@@ -1,6 +1,3 @@
-# Hue gem:
-# https://github.com/kballenegger/ruby-hue
-
 # Applescript to hit a url:
 # do shell script "curl http://localhost:4567/<url>"
 
