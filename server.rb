@@ -16,8 +16,6 @@ lights = {
   "kitchen" => 8,
 }
 
-
-
 # Iniailize Hue
 while true
   begin
