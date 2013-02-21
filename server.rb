@@ -1,5 +1,3 @@
-# Applescript to hit a url:
-# do shell script "curl http://localhost:4567/<url>"
 
 require 'hue'
 require 'terminal-notifier'
@@ -26,18 +24,57 @@ while true
   end
 end
 
-# Iniailize state
-$counter = 0
+####################################
+# Stuff for handling the Griffin Powermate that controls
+# the lights.
+#
+# Rotating the powermate should run an applescript like this:
+#   do shell script "curl http://localhost:4567/<increment/decrement>Dial --max-time 1"
+####################################
+
+$lightDialValue = 0
 
 # Setup URLs
 get '/incrementDial' do
-  $counter += 1
-  TerminalNotifier.notify("Counter: %d" % $counter, :title => "Hue thing", :group => "hue")
+  $lightDialValue += 1
+  $lightDialValue = 100 if $lightDialValue > 100
+  # For some reason this puts fixes a bug where random requests will take like 30 seconds when
+  # there's a bunch if increment/decrements in a row. Probably some threading thing, but a
+  # mutex didn't seem to help...
+  puts $lightDialValue
 end
 get '/decrementDial' do
-  $counter -= 1
-  TerminalNotifier.notify("Counter: %d" % $counter, :title => "Hue thing", :group => "hue")
+  $lightDialValue -= 1
+  $lightDialValue = 0 if $lightDialValue < 0
+  puts $lightDialValue
 end
+
+# Spawn a thread to handle updating the brightness of all lights
+# when the light-controlling powermate is rotated.
+$lastBrightness = 0
+Thread.new {
+  while true do
+    if $lastBrightness != $lightDialValue
+      $lastBrightness = $lightDialValue
+      $h.all_lights.write({bri: $lastBrightness * 255 / 100})
+    else 
+      sleep 0.4
+    end
+  end
+}
+
+# Spawn a thread to handle updating the glowing light on the
+# light-controlling powermate by running some AppleScript.
+Thread.new {
+  while true do
+    if $lastBrightness != $lightDialValue
+      `osascript #{File.expand_path(File.dirname(__FILE__))}/setLightDialState.scpt #{$lightDialValue}`
+    else
+      sleep 0.1
+    end
+  end
+}
+
 
 # Cycle through all colors in sync
 get '/cycle' do 
