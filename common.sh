@@ -88,6 +88,14 @@ function green {
     allstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":25717,"transitiontime":10}'
 }
 
+function blue {
+    allstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":46920,"transitiontime":10}'
+}
+
+function red {
+    allstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":0,"transitiontime":10}'
+}
+
 function deepsea {
     lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":65527,"transitiontime":10}' 1
     lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":46359,"transitiontime":10}' 2
