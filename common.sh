@@ -97,19 +97,17 @@ function red {
 }
 
 function deepsea {
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":65527,"transitiontime":10}' 1
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":46359,"transitiontime":10}' 2
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":65527,"transitiontime":10}' 3
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":46624,"transitiontime":10}' 4
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":46166,"transitiontime":10}' 5
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":65527,"transitiontime":10}' 6
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":45370,"transitiontime":10}' 7
-    lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":43991,"transitiontime":10}' 8
+    colors=(65527 46359 65527 46624 46166 65527 45370 43991)
+    len=${#colors[@]}
+    for (( i=1; i<=${len}; i++ ))
+    do
+        lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":'${colors[$i-1]}',"transitiontime":10}' $i
+    done
 }
 
 function night {
     lightstate '{"on":false,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 1
-    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 2
+    lightstate '{"on":false,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 2
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 3
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 4
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 5
