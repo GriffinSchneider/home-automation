@@ -1,3 +1,4 @@
+#!/bin/bash
 source $(dirname $0)/common.sh
 
 if [[ $(($RANDOM % 2)) = 0 ]]
