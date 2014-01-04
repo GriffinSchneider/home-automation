@@ -1,8 +1,8 @@
-numberoflights=8
+numberoflights=10
 
 hueusername='1234567890'
 
-hueurl='http://192.168.1.105/api/'$hueusername
+hueurl='http://192.168.1.125/api/'$hueusername
 lightsurl=$hueurl'/lights'
 groupsurl=$hueurl'/groups'
 
@@ -10,7 +10,7 @@ groupsurl=$hueurl'/groups'
 # Argument 2: URL to PUT to
 function makerequest {
     echo $1 "${2}"
-    curl -s --request PUT --data $1 "${2}" | ruby -rawesome_print -rjson -e "ap JSON.parse(STDIN.read)"
+    curl -s --request PUT --data $1 "${2}"
 }
 
 function getstate {
@@ -73,7 +73,7 @@ function allon {
 }
 
 function morning {
-    allstate '{"on":true,"effect":"none","bri":255,"sat":232,"hue":34495}'
+    allstate '{"on":true,"effect":"none","bri":255,"xy":[0.3151,0.3252]}'
 }
 
 function warning {
@@ -81,7 +81,7 @@ function warning {
 }
 
 function relax {
-    allstate '{"on":true,"effect":"none","bri":144,"sat":211,"hue":13122,"transitiontime":10}'
+    allstate '{"on":true,"effect":"none","bri":144,"xy":[0.5119,0.4147]}'
 }
 
 function green {
@@ -97,7 +97,7 @@ function red {
 }
 
 function deepsea {
-    colors=(65527 46359 65527 46624 46166 65527 45370 43991)
+    colors=(65527 46359 65527 46624 46166 65527 45370 43991 43991 65527)
     len=${#colors[@]}
     for (( i=1; i<=${len}; i++ ))
     do
@@ -114,6 +114,8 @@ function night {
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 6
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 7
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 8
+    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 9
+    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 10
 }
 
 function asleep {
