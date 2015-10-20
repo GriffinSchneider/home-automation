@@ -76,6 +76,16 @@ function morning {
     allstate '{"on":true,"effect":"none","bri":255,"xy":[0.3151,0.3252]}'
 }
 
+function bright {
+    allstate '{"on":true,"effect":"none","bri":255}'
+}
+function dim {
+    allstate '{"on":true,"effect":"none","bri":70}'
+}
+function dark {
+    allstate '{"on":true,"effect":"none","bri":5}'
+}
+
 function warning {
     allstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":0,"transitiontime":10}'
 }
@@ -101,7 +111,7 @@ function deepsea {
     len=${#colors[@]}
     for (( i=1; i<=${len}; i++ ))
     do
-        lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":'${colors[$i-1]}',"transitiontime":10}' $i
+        lightstate '{"on":true,"effect":"none","bri":255,"sat":255,"hue":'${colors[$i]}',"transitiontime":10}' $i
     done
 }
 
