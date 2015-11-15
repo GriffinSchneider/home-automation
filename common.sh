@@ -1,4 +1,4 @@
-numberoflights=10
+numberoflights=15
 
 hueusername='1234567890'
 
@@ -107,7 +107,7 @@ function red {
 }
 
 function deepsea {
-    colors=(65527 46359 65527 46624 46166 65527 45370 43991 43991 65527)
+    colors=(65527 46359 65527 46624 46166 65527 45370 43991 43991 65527 43991 65528 43991 65527)
     len=${#colors[@]}
     for (( i=1; i<=${len}; i++ ))
     do
@@ -126,6 +126,10 @@ function night {
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 8
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 9
     lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 10
+    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 11
+    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 12
+    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 13
+    lightstate '{"on":true,"effect":"none","bri":1,"sat":255,"hue":0,"transitiontime":50}' 14
 }
 
 function asleep {
