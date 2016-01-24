@@ -11,6 +11,7 @@ function noeffect  { home-automation noeffect; }
 
 function morning   { home-automation morning; }
 function relax     { home-automation relax; }
+function brightlax { home-automation brightlax; }
 
 function green     { home-automation green; }
 function blue      { home-automation blue; }

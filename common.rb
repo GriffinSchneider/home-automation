@@ -87,6 +87,10 @@ def relax
   all_state bri: 144, xy: [0.5119,0.4147]
 end
 
+def brightlax
+  all_state bri: 255, xy: [0.5119,0.4147]
+end
+
 
 def green
   all_state bri: 255,sat: 255, hue: 25717

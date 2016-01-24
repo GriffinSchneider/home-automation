@@ -6,9 +6,7 @@ sleep 2
 
 if [[ $(($RANDOM % 2)) = 0 ]]
 then
-    relax
-    sleep 2
-    bright
+    brightlax
 else
     deepsea
 fi
