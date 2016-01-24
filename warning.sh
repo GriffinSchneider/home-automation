@@ -2,6 +2,5 @@
 source $(dirname $0)/aliases.sh
 
 allon
-sleep 2
-green
-green
+sleep 1
+red
