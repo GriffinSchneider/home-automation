@@ -1,5 +1,0 @@
-source 'https://rubygems.org'
-gem 'hue'
-gem 'sinatra'
-gem 'data_mapper'
-gem 'dm-sqlite-adapter'
