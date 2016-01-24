@@ -28,3 +28,4 @@ if ARGV.empty?
 end
 
 eval ARGV[0]
+join_all_threads

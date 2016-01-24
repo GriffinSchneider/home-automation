@@ -1,5 +1,6 @@
 require 'rest-client'
 require 'JSON'
+require 'colorize'
 
 
 USERNAME="1234567890"
@@ -10,13 +11,31 @@ GROUPS_URL="#{HUE_URL}/groups"
 LIGHTS = [1, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15]
 BEDROOM_LIGHTS = [3, 4, 15]
 
+THREADS = []
 
 def req(url, json)
-  puts json
-  puts url
-  RestClient.put url, json.to_json
+  THREADS << Thread.new do
+    loop do
+      begin
+        response = RestClient.put url, json.to_json
+      rescue Errno::ECONNRESET, Errno::EPIPE => e
+        puts "#{url.blue}: " + "#{e}".red
+        next
+      end
+      if response.code == 200
+        puts "#{url.blue}:\n  #{response.body.green}"
+        break 
+      else
+        puts "#{url.blue}:\n  #{response.body.red}"
+      end
+    end
+  end
+  sleep 0.05
 end
 
+def join_all_threads
+  THREADS.each {|t| t.join}
+end
 
 def light_state(light, json)
   req "#{LIGHTS_URL}/#{light}/state", json
