@@ -8,7 +8,20 @@ HUE_URL="http://192.168.1.125/api/#{USERNAME}"
 LIGHTS_URL="#{HUE_URL}/lights"
 GROUPS_URL="#{HUE_URL}/groups"
 
-LIGHTS = [1, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 15]
+LIGHTS = [
+  1,  # Hallway
+  3,  # 3-Lamp Mid
+  4,  # 3-Lamp Top
+  6,  # Tube Light
+  7,  # Sink
+  8,  # Bathroom
+  9,  # TV
+  11, # Living Room BL
+  12, # Living Room FR
+  13, # Living Room BR
+  14, # Living Room FL
+  15  # Reading Lamp
+]
 BEDROOM_LIGHTS = [3, 4, 15]
 
 THREADS = []
@@ -129,6 +142,8 @@ def night
 end
 
 def deepsea
-  colors = [65527, 46359, 65527, 46624, 46166, 65527, 45370, 43991, 43991, 65527, 43991, 65528]
+  b = 46920
+  r = 0
+  colors = [b, r, b, b, r, r, r, r, r, b, b, r]
   colors.each_with_index {|c, l| light_state LIGHTS[l], bri: 255, sat: 255, hue: c}
 end
