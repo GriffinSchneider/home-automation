@@ -19,3 +19,4 @@ function red       { home-automation red; }
 
 function night     { home-automation night; }
 function deepsea   { home-automation deepsea; }
+function read      { home-automation read; }

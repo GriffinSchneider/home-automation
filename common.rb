@@ -147,3 +147,7 @@ def deepsea
   colors = [b, r, b, b, r, r, r, r, r, b, b, r]
   colors.each_with_index {|c, l| light_state LIGHTS[l], bri: 255, sat: 255, hue: c}
 end
+
+def read
+  light_state 15, bri: 144, xy: [0.5119,0.4147]
+end
