@@ -24,6 +24,20 @@ LIGHTS = [
 ]
 BEDROOM_LIGHTS = [3, 4, 15]
 
+ROOMS = {
+  "bed" => [3, 4, 15],
+  "living" => [1, 6, 7, 9, 11, 12, 13, 14, 15],
+  "bath" => [8]
+}
+
+def set_room_filter(room)
+  $room_filter = room
+end
+
+def filtered?(light)
+  $room_filter == nil || ROOMS[$room_filter].include?(light)
+end
+
 THREADS = []
 
 def req(url, json)
@@ -51,7 +65,7 @@ def join_all_threads
 end
 
 def light_state(light, json)
-  req "#{LIGHTS_URL}/#{light}/state", json
+  req "#{LIGHTS_URL}/#{light}/state", json if filtered?(light)
 end
 
 def light_states(lights, json)

@@ -20,6 +20,9 @@ OptionParser.new do |opts|
   opts.on("-f", "--off") do |brightness|
     options.on = false
   end
+  opts.on("-r", "--room ROOM") do |room|
+    options.room = room
+  end
 end.parse! ARGV
 
 if ARGV.empty?
@@ -27,5 +30,6 @@ if ARGV.empty?
   exit 1
 end
 
+set_room_filter options.room if options.room
 eval ARGV[0]
 join_all_threads
