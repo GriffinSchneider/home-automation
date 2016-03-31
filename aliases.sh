@@ -1,22 +1,22 @@
-function allon     { home-automation allon; }
-function alloff    { home-automation alloff; }
-function asleep    { home-automation asleep; }
+alias allon='home-automation allon'
+alias alloff='home-automation alloff'
+alias asleep='home-automation asleep'
 
-function bright    { home-automation bright; }
-function dim       { home-automation dim; }
-function dark      { home-automation dark; }
+alias bright='home-automation bright'
+alias dim='home-automation dim'
+alias dark='home-automation dark'
 
-function colorloop { home-automation colorloop; }
-function noeffect  { home-automation noeffect; }
+alias colorloop='home-automation colorloop'
+alias noeffect='home-automation noeffect'
 
-function morning   { home-automation morning; }
-function relax     { home-automation relax; }
-function brightlax { home-automation brightlax; }
+alias morning='home-automation morning'
+alias relax='home-automation relax'
+alias brightlax='home-automation brightlax'
 
-function green     { home-automation green; }
-function blue      { home-automation blue; }
-function red       { home-automation red; }
+alias green='home-automation green'
+alias blue='home-automation blue'
+alias red='home-automation red'
 
-function night     { home-automation night; }
-function deepsea   { home-automation deepsea; }
-function reading   { home-automation read; }
+alias night='home-automation night'
+alias deepsea='home-automation deepsea'
+alias reading='home-automation reading'
