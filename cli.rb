@@ -30,6 +30,6 @@ if ARGV.empty?
   exit 1
 end
 
-set_room_filter options.room if options.room
+set_room_filter ARGV[1] || options.room
 eval ARGV[0]
 join_all_threads

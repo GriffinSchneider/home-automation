@@ -22,16 +22,22 @@ LIGHTS = [
   14, # Living Room FL
   15  # Reading Lamp
 ]
-BEDROOM_LIGHTS = [3, 4, 15]
 
 ROOMS = {
+  "bath" => [8],
   "bed" => [3, 4, 15],
-  "living" => [1, 6, 7, 9, 11, 12, 13, 14, 15],
-  "bath" => [8]
+  "living" => [1, 6, 7, 9, 11, 12, 13, 14],
+  "couch" => [11, 12, 13, 14],
+  "kitchen" => [7, 6],
 }
 
+def find_room_name(r)
+  ROOMS.select {|n| n.start_with? r}.keys[0]
+end
+
 def set_room_filter(room)
-  $room_filter = room
+  return unless room
+  $room_filter = find_room_name room
 end
 
 def filtered?(light)
@@ -99,7 +105,7 @@ def alloff
 end
 
 def asleep
-  light_states BEDROOM_LIGHTS, on: false
+  light_states ROOMS["bed"], on: false
 end 
 
 
