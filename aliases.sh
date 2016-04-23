@@ -1,3 +1,5 @@
+shopt -s expand_aliases
+
 alias allon='home-automation allon'
 alias alloff='home-automation alloff'
 alias asleep='home-automation asleep'
