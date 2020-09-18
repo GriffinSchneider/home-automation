@@ -4,31 +4,44 @@ require 'colorize'
 
 
 USERNAME="1234567890"
-HUE_URL="http://192.168.1.125/api/#{USERNAME}"
+HUE_URL="http://192.168.1.145/api/#{USERNAME}"
 LIGHTS_URL="#{HUE_URL}/lights"
 GROUPS_URL="#{HUE_URL}/groups"
 
 LIGHTS = [
-  1,  # Hallway
+  1,  # Right living room lamp
   3,  # 3-Lamp Mid
   4,  # 3-Lamp Top
-  6,  # Tube Light
-  7,  # Sink
-  8,  # Bathroom
-  9,  # TV
-  11, # Living Room BL
-  12, # Living Room FR
-  13, # Living Room BR
-  14, # Living Room FL
-  15  # Reading Lamp
+  6,  # TV right
+  7,  # Closet
+  8,  # TV Left
+  22, # TV light strip
+  11, # 4-lamp top mid
+  12, # 4-lamp bot mid
+  13, # 4-lamp top
+  14, # 4-lamp bot
+  15, # 3-Lamp Bot
+  16, # Battery Floor Lamp
+  17, # Hall 1
+  18, # Kitchen 1
+  19, # Hall 2
+  20, # Kitchen 2
+  21, # Bathroom Lightstrip
+  23, # Monitor Lightstrip
+  9,  # Old light strip
 ]
 
+BRIGHTNESS_FLOORED = [ 22, 21, 23 ]
+
+BRIGHTNESS_SCALE = {
+  23 => 0.4,
+}
+
 ROOMS = {
-  "bath" => [8],
-  "bed" => [3, 4, 15],
-  "living" => [1, 6, 7, 9, 11, 12, 13, 14],
-  "couch" => [11, 12, 13, 14],
-  "kitchen" => [7, 6],
+  "bed" => [3, 4, 7, 15, 22],
+  "living" => [6, 9, 11, 12, 13, 14, 16, 17, 19],
+  "kitchen" => [19, 20],
+  "bath" => [21],
 }
 
 def find_room_name(r)
@@ -71,6 +84,8 @@ def join_all_threads
 end
 
 def light_state(light, json)
+  scaled_brightness = (json[:bri] * (BRIGHTNESS_SCALE[light] || 1)).round
+  json[:bri] = [scaled_brightness, 40].max if json[:bri] and BRIGHTNESS_FLOORED.include? light
   req "#{LIGHTS_URL}/#{light}/state", json if filtered?(light)
 end
 
@@ -105,7 +120,7 @@ def alloff
 end
 
 def asleep
-  light_states ROOMS["bed"], on: false
+  alloff
 end 
 
 
@@ -132,7 +147,7 @@ end
 
 
 def morning
-    all_state effect: :none, bri: 255, xy: [0.3151,0.3252]
+  all_state effect: :none, bri: 255, xy: [0.3151,0.3252]
 end
 
 def relax
@@ -141,6 +156,14 @@ end
 
 def brightlax
   all_state bri: 255, xy: [0.5119,0.4147]
+end
+
+def normal
+  all_state bri: 255, ct: 350
+end
+
+def focus
+  all_state bri: 255, ct: 235
 end
 
 
@@ -156,6 +179,10 @@ def red
   all_state bri: 255,sat: 255, hue: 0
 end
 
+def orange
+  all_state bri: 255,sat: 255, hue: 6000
+end
+
 
 def night
   all_state bri:0, sat:255, hue:0, transitiontime:50 
@@ -164,7 +191,7 @@ end
 def deepsea
   b = 46920
   r = 0
-  colors = [b, r, b, b, r, r, r, r, r, b, b, r]
+  colors = [b, b, r, r, r, r, b, r, b, b, r, r, r, r, r, b, b, b]
   colors.each_with_index {|c, l| light_state LIGHTS[l], bri: 255, sat: 255, hue: c}
 end
 

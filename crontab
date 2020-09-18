@@ -1,0 +1,7 @@
+0 9 * * 1-5 /home/griffin/home-automation/morning.sh
+30 9 * * 0,6 /home/griffin/home-automation/morning.sh
+50 9 * * 1-5 /home/griffin/home-automation/warning.sh
+08 10 * * 1-5 /home/griffin/home-automation/leftforwork.sh
+20 16 * * 0,6 /home/griffin/home-automation/green.sh
+30 18 * * 1-5 /home/griffin/home-automation/home.sh
+00 00 * * * /home/griffin/home-automation/night.sh

@@ -2,5 +2,5 @@
 source $(dirname $0)/aliases.sh
 
 allon
-night
-night
+sleep 2
+relax
