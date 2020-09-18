@@ -84,8 +84,12 @@ def join_all_threads
 end
 
 def light_state(light, json)
-  scaled_brightness = (json[:bri] * (BRIGHTNESS_SCALE[light] || 1)).round
-  json[:bri] = [scaled_brightness, 40].max if json[:bri] and BRIGHTNESS_FLOORED.include? light
+  if json[:bri]
+    brightness = json[:bri]
+    brightness = (brightness * (BRIGHTNESS_SCALE[light] || 1)).round
+    brightness = [brightness, 40].max if  BRIGHTNESS_FLOORED.include? light
+    json[:bri] = brightness
+  end
   req "#{LIGHTS_URL}/#{light}/state", json if filtered?(light)
 end
 
