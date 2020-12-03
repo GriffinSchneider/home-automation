@@ -34,7 +34,7 @@ LIGHTS = [
 BRIGHTNESS_FLOORED = [ 22, 21, 23 ]
 
 BRIGHTNESS_SCALE = {
-  23 => 0.4,
+  23 => 0.6,
 }
 
 ROOMS = {
