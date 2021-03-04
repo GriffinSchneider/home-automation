@@ -28,6 +28,8 @@ LIGHTS = [
   20, # Kitchen 2
   21, # Bathroom Lightstrip
   23, # Monitor Lightstrip
+  24, # Battery Lamp
+  25, # Battery Lamp
   9,  # Old light strip
 ]
 
